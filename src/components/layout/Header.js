@@ -1,20 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import SignedInLinks from './SignedInLinks';
-import SignedOutLinks from './SignedOutLinks';
+// import { Link } from 'react-router-dom';
+// import SignedInLinks from './SignedInLinks';
+// import SignedOutLinks from './SignedOutLinks';
 import { AuthUserContext } from '../session';
+// import SignOutButton from '../auth/SignOut';
+import { connect } from 'react-redux';
 
 const Header = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-      <Link to='/' className="nav-item nav-link logo ">Logo</Link>
-      <AuthUserContext.Consumer>
-        {authUser =>
-          authUser ? <SignedInLinks /> : <SignedOutLinks />
-        }
-      </AuthUserContext.Consumer>
+    <nav className="navbar navbar-light bg-dark">
+      <img alt="logo" className="nav-item logo" src={process.env.PUBLIC_URL + '/logo_timetracker.png'} />;
     </nav>
   );
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+
+  }
+}
+
+export default connect(mapStateToProps)(Header);

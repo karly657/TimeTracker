@@ -2,19 +2,24 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Header from './components/layout/Header';
 import SignIn from './components/auth/SignIn';
-import SignUpPage from './components/auth/SignUp';
-import SignOutButton from './components/auth/SignOut';
-import { withAuthentication } from './components/session';
+import SignUp from './components/auth/SignUp';
+import './App.css';
+import Calendar from './components/Calendar/Calendar'
 
 const App = () => (
   <BrowserRouter>
     <Header />
-    <Switch>
-      <Route path='/signin' component={SignIn}></Route>
-      <Route path='/signup' component={SignUpPage}></Route>
-    </Switch>
-    <SignOutButton />
+    <div className="container">
+      <Switch>
+        <Route exact path='/'component={Calendar} />
+        <Route path='/signin' component={SignIn} />
+        <Route path='/signup' component={SignUp} />
+      </Switch>
+    </div>
+
+
   </BrowserRouter>
 );
 
-export default withAuthentication(App);
+// export default withAuthentication(App);
+export default App;
