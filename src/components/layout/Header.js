@@ -1,24 +1,20 @@
-import React from 'react';
-// import SignedOutLinks from './SignedOutLinks';
-import { connect } from 'react-redux';
-import SignedInLinks from './SignedInLinks';
+import React from 'react'
+import { connect } from 'react-redux'
+import SignedInLinks from './SignedInLinks'
 
 const Header = (props) => {
-  const { auth, profile } = props;
-  const links = auth.uid ? <SignedInLinks profile={profile}/> : null;
+  const links = props.auth.uid ? <SignedInLinks email={props.auth.email}/> : null;
   return (
     <nav className="navbar navbar-light bg-dark">
-      <img alt="logo" className="nav-item logo" src={process.env.PUBLIC_URL + '/logo_timetracker.png'} />;
+      <img alt="logo" className="nav-item logo" src={process.env.PUBLIC_URL + '/logo_timetracker.png'} />
       {links}
     </nav>
   );
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
-    auth: state.firebase.auth,
-    profile: state.firebase.profile
+    auth: state.firebase.auth
   }
 }
 

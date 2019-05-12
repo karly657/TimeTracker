@@ -1,10 +1,14 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { signOut } from '../../store/actions/authActions';
+import React from 'react'
+import { connect } from 'react-redux'
+import { signOut } from '../../actions/authActions'
 
 const SignedInLinks = (props) => {
   return (
-    <button className="log-out-button" type="button" onClick={props.signOut}>Log Out</button>
+    <div>
+      <span className="header-email">{props.email}</span>
+      <button className="log-out-button" type="button" onClick={props.signOut}>Log Out</button>
+    </div>
+    
   )
 }
 

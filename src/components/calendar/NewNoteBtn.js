@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const NewNoteBtn = () => (
- <button>New note</button>
+  <p><Link to="/createnote"><button className="btn btn-secondary">Create note</button></Link></p>
 );
 
 export default NewNoteBtn;
