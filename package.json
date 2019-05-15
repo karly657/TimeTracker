@@ -17,7 +17,7 @@
     "react-scripts": "3.0.0",
     "recompose": "^0.30.0",
     "redux": "^4.0.1",
-    "redux-firestore": "^0.7.3",
+    "redux-firestore": "^0.7.4",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"
   },

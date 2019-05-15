@@ -1,20 +1,18 @@
-import React from "react";
-import dateFns from "date-fns";
-import { parse } from "date-fns/parse"
+import React from "react"
+import dateFns from "date-fns"
 
 const NoteComponent = (props) => {
+  let res;
 
-  const dateFormat = "DD.MM.YYYY";
-
-  // const items = this.props.notes && this.props.notes.map(note => (
-  //   // <p key={note.id}>{JSON.stringify(note)}</p>
-  //   parse(note.hours, dateFormat, new Date())
-  // ));
-
-  // const comp = (dateFns.isSameDay(this.props.day, this.props.day)) ? (<p>true</p>) : <div />
-
-  const comp =<div></div>
-  return comp;
+  if (props.notes) {
+    res = props.notes.find(o => dateFns.isSameDay(props.day, o.date));
+    if (res && res.hours > 8) {
+      return <div className="red-bg">{res.hours}</div>
+    } else if (res) {
+      return <div className="green-bg">{res.hours}</div>
+    }
+  }
+  return null;
 }
 
 export default NoteComponent;

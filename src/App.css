@@ -1,3 +1,10 @@
+.red-bg {
+  background-color: red;
+  width: 
+}
+.green-bg {
+  background-color: green;
+}
 .logo {
   height: 50px;
 }
@@ -141,7 +148,7 @@ main {
   position: relative;
   height: 5em;
   overflow: hidden;
-  background: var(--neutral-color);
+  background: lightgray;
   transition: 0.25s ease-out;
 }
 
@@ -149,10 +156,6 @@ main {
   border-left: 10px solid transparent;
   border-image: linear-gradient(45deg, #1a8fff 0%, #53cbf1 40%);
   border-image-slice: 1;
-}
-
-.calendar .body .row {
-  border-bottom: 1px solid var(--border-color);
 }
 
 .calendar .body .row:last-child {
@@ -180,7 +183,6 @@ main {
 .calendar .body .cell .bg {
   font-weight: 700;
   line-height: 1;
-  color: var(--main-color);
   opacity: 0;
   font-size: 8em;
   position: absolute;
@@ -194,4 +196,8 @@ main {
   flex-grow: 0;
   flex-basis: calc(100% / 7);
   width: calc(100% / 7);
+}
+
+.col .cell {
+  padding: 0px;
 }

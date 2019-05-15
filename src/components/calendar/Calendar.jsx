@@ -1,6 +1,6 @@
-import React from "react";
-import dateFns from "date-fns";
-import NoteComponent from "./NoteComponent";
+import React from "react"
+import dateFns from "date-fns"
+import NoteComponent from "./NoteComponent"
 
 class Calendar extends React.Component {
   state = {
@@ -61,7 +61,7 @@ class Calendar extends React.Component {
     while (day <= endDate) {
       for (let i = 0; i < 7; i++) {
         formattedDate = dateFns.format(day, dateFormat);
-        // console.log(day);
+        
         days.push(
           <div
             className={`col cell ${
@@ -72,8 +72,8 @@ class Calendar extends React.Component {
             key={day}
           >
             <span className="number">{formattedDate}</span>
-
-            <NoteComponent day={day} list={this.props.notes}/>
+            
+            <NoteComponent day={day} notes={this.props.notes}/>
 
           </div>
         );
@@ -86,11 +86,6 @@ class Calendar extends React.Component {
       );
       days = [];
     }
-
-    const noteItems = this.props.notes && this.props.notes.map(note => 
-      <span className="note" key={note.id}>{note.hours}</span>
-    );
-
     return <div className="body">{rows}</div>;
   }
 
@@ -108,21 +103,11 @@ class Calendar extends React.Component {
 
   render() {
     // console.log(this.props.notes);
-
-    const items = this.props.notes && this.props.notes.map(note => 
-        <p key={note.id}>{JSON.stringify(note)}</p>
-    );
-
-    const items2 = this.props.notes && this.props.notes.map(note => 
-      <span className="note" key={note.id}>{note.hours}</span>
-    );
-
     return (
       <div className="calendar">
         {this.renderHeader()}
         {this.renderDays()}
         {this.renderCells()}
-        {items2}
       </div>
     );
   }
