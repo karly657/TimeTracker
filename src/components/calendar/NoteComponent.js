@@ -16,3 +16,5 @@ const NoteComponent = (props) => {
 }
 
 export default NoteComponent;
+
+
