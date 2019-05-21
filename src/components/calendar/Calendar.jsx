@@ -1,15 +1,14 @@
-import React from "react"
-import dateFns from "date-fns"
-import NoteComponent from "./NoteComponent"
+import React from 'react'
+import dateFns from 'date-fns'
+import NoteComponent from './NoteComponent'
+import * as constants from '../../constants'
 
 class Calendar extends React.Component {
   state = {
-    currentMonth: new Date()
+    currentDate: new Date()
   };
 
   renderHeader() {
-    const dateFormat = "MMMM YYYY";
-
     return (
       <div className="header row flex-middle">
         <div className="col col-start">
@@ -18,7 +17,7 @@ class Calendar extends React.Component {
             </div>
         </div>
         <div className="col col-center">
-          <span>{dateFns.format(this.state.currentMonth, dateFormat)}</span>
+          <span>{dateFns.format(this.state.currentDate, constants.HEADER_DATE_FORMAT)}</span>
         </div>
         <div className="col col-end" onClick={this.nextMonth}>
           <div className="icon">chevron_right</div>
@@ -28,15 +27,14 @@ class Calendar extends React.Component {
   }
 
   renderDays() {
-    const dateFormat = "dddd";
     const days = [];
 
-    let startDate = dateFns.startOfWeek(this.state.currentMonth);
+    let startDate = dateFns.startOfWeek(this.state.currentDate);
 
     for (let i = 0; i < 7; i++) {
       days.push(
         <div className="col col-center" key={i}>
-          {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
+          {dateFns.format(dateFns.addDays(startDate, i), constants.DAY_DATE_FORMAT)}
         </div>
       );
     }
@@ -45,13 +43,12 @@ class Calendar extends React.Component {
   }
 
   renderCells() {
-    const { currentMonth, selectedDate } = this.state; 
-    const monthStart = dateFns.startOfMonth(currentMonth);
+    const { currentDate, selectedDate } = this.state; 
+    const monthStart = dateFns.startOfMonth(currentDate);
     const monthEnd = dateFns.endOfMonth(monthStart);
     const startDate = dateFns.startOfWeek(monthStart);
     const endDate = dateFns.endOfWeek(monthEnd);
 
-    const dateFormat = "D";
     const rows = [];
 
     let days = [];
@@ -60,8 +57,7 @@ class Calendar extends React.Component {
 
     while (day <= endDate) {
       for (let i = 0; i < 7; i++) {
-        formattedDate = dateFns.format(day, dateFormat);
-        
+        formattedDate = dateFns.format(day, constants.CELLS_DATE_FORMAT);
         days.push(
           <div
             className={`col cell ${
@@ -72,9 +68,7 @@ class Calendar extends React.Component {
             key={day}
           >
             <span className="number">{formattedDate}</span>
-            
             <NoteComponent day={day} notes={this.props.notes}/>
-
           </div>
         );
         day = dateFns.addDays(day, 1);
@@ -86,23 +80,23 @@ class Calendar extends React.Component {
       );
       days = [];
     }
+
     return <div className="body">{rows}</div>;
   }
 
   nextMonth = () => {
-    this.setState({
-      currentMonth: dateFns.addMonths(this.state.currentMonth, 1)
-    });
+    this.setState((prevState) => ({
+      currentDate: dateFns.addMonths(prevState.currentDate, 1)
+    }))
   };
 
   prevMonth = () => {
-    this.setState({
-      currentMonth: dateFns.subMonths(this.state.currentMonth, 1)
-    });
+    this.setState((prevState) => ({
+      currentDate: dateFns.subMonths(prevState.currentDate, 1)
+    }))
   };
 
   render() {
-    // console.log(this.props.notes);
     return (
       <div className="calendar">
         {this.renderHeader()}

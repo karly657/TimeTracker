@@ -8,7 +8,6 @@ const SignedInLinks = (props) => {
       <span className="header-email">{props.email}</span>
       <button className="log-out-button" type="button" onClick={props.signOut}>Log Out</button>
     </div>
-    
   )
 }
 

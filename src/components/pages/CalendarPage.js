@@ -1,14 +1,14 @@
-import React, { Component } from "react"
-import { connect } from "react-redux"
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
-import NewNoteBtn from './NewNoteBtn'
-import Calendar from './Calendar'
+import NewNoteBtn from '../Calendar/NewNoteBtn'
+import Calendar from '../Calendar/Calendar'
 
 class CalendarPage extends Component {
   render() {
     const { notes } = this.props;
-
+    
     return (
       <div>
         <NewNoteBtn />

@@ -1,18 +1,27 @@
 .red-bg {
-  background-color: red;
-  width: 
+  background-color: #f3afaf;
+  height: inherit;
+  padding: 5px;
 }
 .green-bg {
-  background-color: green;
+  background-color: #a7f3b6;
+  padding: 5px;
+  height: inherit;
 }
 .logo {
   height: 50px;
 }
-
+.content {
+  padding: 40px 0;
+}
+.form-error {
+  background-color: #f3afaf;
+}
 .log-out-button {
   border-radius: 13px;
   border: none;
   background-color: white;
+  margin: 0 20px;
 }
 .cell {
   background-color: lightgray;
@@ -35,8 +44,6 @@ body {
   font-size: 1em;
   font-weight: 300;
   line-height: 1.5;
-  color: var(--text-color);
-  background: var(--bg-color);
 }
 
 header {
@@ -46,26 +53,6 @@ header {
   border-bottom: 1px solid var(--border-color);
   background: var(--neutral-color);
 }
-
-header #logo {
-  font-size: 175%;
-  text-align: center;
-  color: var(--main-color);
-  line-height: 1;
-}
-
-header #logo .icon {
-  padding-right: 0.25em;
-}
-
-main {
-  display: block;
-  margin: 0 auto;
-  margin-top: 5em;
-  max-width: 50em;
-}
-
-/* GRID */
 
 .row {
   margin: 0;
@@ -107,8 +94,6 @@ main {
   display: block;
   position: relative;
   width: 100%;
-  background: var(--neutral-color);
-  border: 1px solid var(--border-color);
 }
 
 .calendar .header {
@@ -117,11 +102,6 @@ main {
   font-size: 115%;
   padding: 1.5em 0;
   border-bottom: 1px solid var(--border-color);
-}
-
-.calendar .header .icon {
-  cursor: pointer;
-  transition: 0.15s ease-out;
 }
 
 .calendar .header .icon:hover {
@@ -148,14 +128,8 @@ main {
   position: relative;
   height: 5em;
   overflow: hidden;
-  background: lightgray;
+  background: rgb(235, 235, 235);
   transition: 0.25s ease-out;
-}
-
-.calendar .body .selected {
-  border-left: 10px solid transparent;
-  border-image: linear-gradient(45deg, #1a8fff 0%, #53cbf1 40%);
-  border-image-slice: 1;
 }
 
 .calendar .body .row:last-child {
@@ -180,24 +154,12 @@ main {
   pointer-events: none;
 }
 
-.calendar .body .cell .bg {
-  font-weight: 700;
-  line-height: 1;
-  opacity: 0;
-  font-size: 8em;
-  position: absolute;
-  top: -0.2em;
-  right: -0.05em;
-  transition: 0.25s ease-out;
-  letter-spacing: -0.07em;
-}
-
 .calendar .body .col {
   flex-grow: 0;
   flex-basis: calc(100% / 7);
   width: calc(100% / 7);
 }
 
-.col .cell {
+.cell {
   padding: 0px;
 }

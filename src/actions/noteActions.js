@@ -1,5 +1,5 @@
 export const createNote = (note) => {
-  return (dispatch, getState, {getFirestore}) => {
+  return (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
     firestore.collection('notes').add({
       date: note.date,
@@ -14,14 +14,14 @@ export const createNote = (note) => {
 
 export const getNotes = () => {
   return (dispatch, getState, { getFirestore }) => {
-    getFirestore().collection("notes").get().then(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {
-          console.log(doc.data());
+    getFirestore().collection("notes").get().then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        console.log(doc.data());
       });
-  }).then(() => {
-    dispatch({ type: 'GET_NOTE_SUCCESS' });
-  }).catch(err => {
-    dispatch({ type: 'GET_NOTE_ERROR' }, err);
-  });;
+    }).then(() => {
+      dispatch({ type: 'GET_NOTE_SUCCESS' });
+    }).catch(err => {
+      dispatch({ type: 'GET_NOTE_ERROR' }, err);
+    });;
   }
 }

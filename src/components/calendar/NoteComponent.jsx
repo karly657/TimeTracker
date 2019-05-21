@@ -1,5 +1,5 @@
-import React from "react"
-import dateFns from "date-fns"
+import React from 'react'
+import dateFns from 'date-fns'
 
 const NoteComponent = (props) => {
   let res;
@@ -7,9 +7,9 @@ const NoteComponent = (props) => {
   if (props.notes) {
     res = props.notes.find(o => dateFns.isSameDay(props.day, o.date));
     if (res && res.hours > 8) {
-      return <div className="red-bg">{res.hours}</div>
+      return <div className="red-bg pt-5">{res.hours} hours</div>
     } else if (res) {
-      return <div className="green-bg">{res.hours}</div>
+      return <div className="green-bg pt-5">{res.hours} hours</div>
     }
   }
   return null;

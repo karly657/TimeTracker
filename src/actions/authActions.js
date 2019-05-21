@@ -6,8 +6,8 @@ export const signIn = (user) => {
       user.password
     ).then(() => {
       dispatch({ type: 'LOGIN_SUCCESS' });
-    }).catch((error) => {
-      dispatch({ type: 'LOGIN_ERROR', error });
+    }).catch((err) => {
+      dispatch({ type: 'LOGIN_ERROR', err });
     });
   }
 }
@@ -31,7 +31,7 @@ export const signUp = (newUser) => {
     ).then(resp => {
       return firestore.collection('users').doc(resp.user.uid).set({
         firstName: newUser.firstName,
-        secondName: newUser.secondName
+        lastName: newUser.lastName
       });
     })
     .then(() => {

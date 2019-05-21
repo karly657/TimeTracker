@@ -1,36 +1,33 @@
+import * as constants from '../constants/actions'
+
 const initState = {
   authError: null
 }
 
 const authReducer = (state = initState, action) => {
   switch(action.type){
-    case 'LOGIN_ERROR':
-      console.log('login error');
+    case constants.LOGIN_ERROR:
       return {
         ...state,
-        authError: 'Login failed'
+        authError: action.err.message
       }
 
-    case 'LOGIN_SUCCESS':
-      console.log('login success');
+    case constants.LOGIN_SUCCESS:
       return {
         ...state,
         authError: null
       }
 
-    case 'SIGNOUT_SUCCESS':
-      console.log('signout success');
+    case constants.SIGNOUT_SUCCESS:
       return state;
 
-    case 'SIGNUP_SUCCESS':
-      console.log('signup success')
+    case constants.SIGNUP_SUCCESS:
       return {
         ...state,
         authError: null
       }
 
-    case 'SIGNUP_ERROR':
-      console.log('signup error')
+    case constants.SIGNUP_ERROR:
       return {
         ...state,
         authError: action.err.message
