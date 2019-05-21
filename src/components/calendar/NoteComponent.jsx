@@ -1,16 +1,18 @@
 import React from 'react'
 import dateFns from 'date-fns'
+import * as constants from '../../constants'
 
 const NoteComponent = (props) => {
-  let res;
-
   if (props.notes) {
-    res = props.notes.find(o => dateFns.isSameDay(props.day, o.date));
-    if (res && res.hours > 8) {
-      return <div className="red-bg pt-5">{res.hours} hours</div>
-    } else if (res) {
-      return <div className="green-bg pt-5">{res.hours} hours</div>
+     let res = props.notes.find(o => dateFns.isSameDay(props.day, o.date));
+    if (res) {
+      return (
+        <div className={`pt-5 ${res && res.hours > constants.MAX_HOURS ? "red-bg" : "green-bg"}`} >
+          {res.hours} hours
+        </div>
+      )
     }
+
   }
   return null;
 }

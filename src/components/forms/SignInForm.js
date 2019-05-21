@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { signIn } from '../../actions/authActions'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
@@ -12,7 +12,7 @@ const SigninSchema = Yup.object().shape({
 });
 
 const SignInForm = (props) => {
-  if (props.auth.uid) return <Redirect to='/' />
+  if (props.uid) return <Redirect to='/' />
 
   return (
     <div className="row justify-content-center">
@@ -44,7 +44,8 @@ const SignInForm = (props) => {
             </div>
 
             <button type="submit" className="btn btn-primary">Sign In</button>
-            <div>{props.authError || null}</div>
+            <div className="mt-2">{props.authError || null}</div>
+            <div className="mt-2">Not registered? <Link to="/signup">Sign Up</Link></div>
           </Form>
         )}
       </Formik>
@@ -54,7 +55,7 @@ const SignInForm = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.firebase.auth,
+    uid: state.firebase.auth.uid,
     authError: state.auth.authError
   }
 }

@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
-import Header from './components/header/Header'
-import SignInForm from './components/forms/SignInForm'
-import SignUpForm from './components/forms/SignUpForm'
-import './App.css'
+
+import Header from './components/Header/Header'
+import SignInPage from './components/pages/SignInPage'
+import SignUpPage from './components/pages/SignUpPage'
 import CalendarPage from './components/pages/CalendarPage'
 import NotFoundPage from './components/pages/NotFoundPage'
 import CreateNoteForm from './components/forms/CreateNoteForm'
-import { connect } from 'react-redux'
+
+import './App.css'
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => {
   return (
@@ -28,8 +30,8 @@ class App extends Component {
           <Switch>
             <PrivateRoute exact path='/' component={CalendarPage} auth={this.props.uid}/>
             <PrivateRoute path='/createnote' component={CreateNoteForm} auth={this.props.uid}/>
-            <Route path='/signin' component={SignInForm} />
-            <Route path='/signup' component={SignUpForm} />
+            <Route path='/signin' component={SignInPage} />
+            <Route path='/signup' component={SignUpPage} />
             <Route component={NotFoundPage} />
           </Switch>
         </div>

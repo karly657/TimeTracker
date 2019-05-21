@@ -2,6 +2,7 @@ import React from 'react'
 import dateFns from 'date-fns'
 import NoteComponent from './NoteComponent'
 import * as constants from '../../constants'
+import './styles.css'
 
 class Calendar extends React.Component {
   state = {
@@ -12,15 +13,13 @@ class Calendar extends React.Component {
     return (
       <div className="header row flex-middle">
         <div className="col col-start">
-          <div className="icon" onClick={this.prevMonth}>
-            chevron_left
-            </div>
+          <div className="icon" onClick={this.prevMonth}>prev_month</div>
         </div>
         <div className="col col-center">
           <span>{dateFns.format(this.state.currentDate, constants.HEADER_DATE_FORMAT)}</span>
         </div>
         <div className="col col-end" onClick={this.nextMonth}>
-          <div className="icon">chevron_right</div>
+          <div className="icon">next_month</div>
         </div>
       </div>
     );
@@ -43,7 +42,7 @@ class Calendar extends React.Component {
   }
 
   renderCells() {
-    const { currentDate, selectedDate } = this.state; 
+    const { currentDate, selectedDate } = this.state;
     const monthStart = dateFns.startOfMonth(currentDate);
     const monthEnd = dateFns.endOfMonth(monthStart);
     const startDate = dateFns.startOfWeek(monthStart);
@@ -55,26 +54,26 @@ class Calendar extends React.Component {
     let day = startDate;
     let formattedDate = "";
 
-    while (day <= endDate) {
-      for (let i = 0; i < 7; i++) {
-        formattedDate = dateFns.format(day, constants.CELLS_DATE_FORMAT);
+    for (let i = day; i <= endDate;) {
+      for (let j = 0; j < 7; j++) {
+        formattedDate = dateFns.format(i, constants.CELLS_DATE_FORMAT);
         days.push(
           <div
             className={`col cell ${
-              !dateFns.isSameMonth(day, monthStart)
+              !dateFns.isSameMonth(i, monthStart)
                 ? "disabled"
-                : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
+                : dateFns.isSameDay(i, selectedDate) ? "selected" : ""
               }`}
-            key={day}
+            key={i}
           >
             <span className="number">{formattedDate}</span>
-            <NoteComponent day={day} notes={this.props.notes}/>
+            <NoteComponent day={i} notes={this.props.notes}/>
           </div>
         );
-        day = dateFns.addDays(day, 1);
+        i = dateFns.addDays(i, 1);
       }
       rows.push(
-        <div className="row" key={day}>
+        <div className="row" key={i}>
           {days}
         </div>
       );

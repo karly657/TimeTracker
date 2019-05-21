@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import SignedInLinks from './SignedInLinks'
-import logo from '../../images/logo_timetracker.png';
+import logo from '../../assets/logo_timetracker.png'
+import './styles.css'
 
 const Header = (props) => {
   return (
