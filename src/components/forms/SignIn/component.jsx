@@ -1,18 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { signIn } from '../../actions/authActions'
+import { signIn } from '../../../actions/authActions'
 import { Redirect, Link } from 'react-router-dom'
 import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
-
-const SigninSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Invalid email')
-    .required('Required')
-});
+import { signInSchema } from '../../schemas'
+import { CALENDAR_PAGE, SIGN_UP_PAGE } from '../../../constants'
 
 const SignInForm = (props) => {
-  if (props.uid) return <Redirect to='/' />
+  if (props.uid) return <Redirect to={CALENDAR_PAGE} />
 
   return (
     <div className="row justify-content-center">
@@ -21,10 +16,10 @@ const SignInForm = (props) => {
           email: '',
           password: '',
         }}
-        validationSchema={SigninSchema}
+        validationSchema={signInSchema}
         onSubmit={values => {
           props.signIn(values);
-          if (Boolean(props.authError)) props.history.push('/');
+          if (Boolean(props.authError)) props.history.push(CALENDAR_PAGE);
         }}
       >
         {({ errors, touched }) => (
@@ -45,7 +40,7 @@ const SignInForm = (props) => {
 
             <button type="submit" className="btn btn-primary">Sign In</button>
             <div className="mt-2">{props.authError || null}</div>
-            <div className="mt-2">Not registered? <Link to="/signup">Sign Up</Link></div>
+            <div className="mt-2">Not registered? <Link to={SIGN_UP_PAGE}>Sign Up</Link></div>
           </Form>
         )}
       </Formik>

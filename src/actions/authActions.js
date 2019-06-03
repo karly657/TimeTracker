@@ -1,3 +1,5 @@
+import { LOGIN_SUCCESS, LOGIN_ERROR, SIGNOUT_SUCCESS, SIGNUP_SUCCESS, SIGNUP_ERROR } from '../constants'
+
 export const signIn = (user) => {
   return (dispatch, getState, {getFirebase}) => {
     const firebase = getFirebase();
@@ -5,9 +7,9 @@ export const signIn = (user) => {
       user.email,
       user.password
     ).then(() => {
-      dispatch({ type: 'LOGIN_SUCCESS' });
+      dispatch({ type: LOGIN_SUCCESS });
     }).catch((err) => {
-      dispatch({ type: 'LOGIN_ERROR', err });
+      dispatch({ type: LOGIN_ERROR, err });
     });
   }
 }
@@ -16,7 +18,7 @@ export const signOut = () => {
   return (dispatch, getState, {getFirebase}) => {
     const firebase = getFirebase();
     firebase.auth().signOut().then(() => {
-      dispatch({ type: 'SIGNOUT_SUCCESS' })
+      dispatch({ type: SIGNOUT_SUCCESS })
     });
   }
 }
@@ -35,9 +37,9 @@ export const signUp = (newUser) => {
       });
     })
     .then(() => {
-      dispatch({ type: 'SIGNUP_SUCCESS' });
+      dispatch({ type: SIGNUP_SUCCESS });
     }).catch((err) => {
-      dispatch({ type: 'SIGNUP_ERROR', err});
+      dispatch({ type: SIGNUP_ERROR, err});
     });
   }
 }

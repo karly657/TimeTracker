@@ -1,31 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { signUp } from '../../actions/authActions'
+import { signUp } from '../../../actions/authActions'
 import { Redirect, Link } from 'react-router-dom'
 import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
-
-const SignupSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-  lastName: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-  email: Yup.string()
-    .email('Invalid email')
-    .required('Required'),
-  password: Yup.string()
-    .min(6, 'The password must be 6 characters long or more.'),
-  passwordTwo: Yup.string()
-    .oneOf([Yup.ref('password')], 'Passwords must match.')
-    .required('Required')
-});
+import { signUpSchema } from '../../schemas'
+import { CALENDAR_PAGE, SIGN_IN_PAGE } from '../../../constants'
 
 const SignUpForm = (props) => {
-  if (props.uid) return <Redirect to='/' />
+  if (props.uid) return <Redirect to={CALENDAR_PAGE} />
 
   return (
     <div className="row justify-content-center">
@@ -37,10 +19,10 @@ const SignUpForm = (props) => {
           firstName: '',
           lastName: '',
         }}
-        validationSchema={SignupSchema}
+        validationSchema={signUpSchema}
         onSubmit={values => {
           props.signUp(values);
-          if (Boolean(props.authError)) props.history.push('/');
+          if (Boolean(props.authError)) props.history.push(CALENDAR_PAGE);
         }}
       >
         {({ errors, touched }) => (
@@ -79,7 +61,7 @@ const SignUpForm = (props) => {
 
             <button type="submit" className="btn btn-primary">Sign Up</button>
             <div className="mt-2">{props.authError || null}</div>
-            <div className="mt-2">Already have an account? <Link to="/signin">Sign In</Link></div>
+            <div className="mt-2">Already have an account? <Link to={SIGN_IN_PAGE}>Sign In</Link></div>
           </Form>
         )}
       </Formik>

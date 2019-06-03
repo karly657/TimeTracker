@@ -1,4 +1,4 @@
-export const HEADER_DATE_FORMAT = 'MMMM YYYY';
-export const DAY_DATE_FORMAT = 'dddd';
-export const CELLS_DATE_FORMAT = 'D';
+export const FULL_DATE_FORMAT = 'MMMM YYYY';
+export const DAY_OF_WEEK_FORMAT = 'dddd';
+export const DAY_FORMAT = 'D';
 export const MAX_HOURS = 8;

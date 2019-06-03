@@ -1,7 +1,7 @@
 import React from 'react'
 import dateFns from 'date-fns'
-import NoteComponent from './NoteComponent'
-import * as constants from '../../constants'
+import { Note } from '../Note'
+import { FULL_DATE_FORMAT, DAY_FORMAT, DAY_OF_WEEK_FORMAT } from '../../../constants'
 import './styles.css'
 
 class Calendar extends React.Component {
@@ -16,7 +16,7 @@ class Calendar extends React.Component {
           <div className="icon" onClick={this.prevMonth}>prev_month</div>
         </div>
         <div className="col col-center">
-          <span>{dateFns.format(this.state.currentDate, constants.HEADER_DATE_FORMAT)}</span>
+          <span>{dateFns.format(this.state.currentDate, FULL_DATE_FORMAT)}</span>
         </div>
         <div className="col col-end" onClick={this.nextMonth}>
           <div className="icon">next_month</div>
@@ -33,7 +33,7 @@ class Calendar extends React.Component {
     for (let i = 0; i < 7; i++) {
       days.push(
         <div className="col col-center" key={i}>
-          {dateFns.format(dateFns.addDays(startDate, i), constants.DAY_DATE_FORMAT)}
+          {dateFns.format(dateFns.addDays(startDate, i), DAY_OF_WEEK_FORMAT)}
         </div>
       );
     }
@@ -56,7 +56,7 @@ class Calendar extends React.Component {
 
     for (let i = day; i <= endDate;) {
       for (let j = 0; j < 7; j++) {
-        formattedDate = dateFns.format(i, constants.CELLS_DATE_FORMAT);
+        formattedDate = dateFns.format(i, DAY_FORMAT);
         days.push(
           <div
             className={`col cell ${
@@ -67,7 +67,7 @@ class Calendar extends React.Component {
             key={i}
           >
             <span className="number">{formattedDate}</span>
-            <NoteComponent day={i} notes={this.props.notes}/>
+            <Note day={i} notes={this.props.notes}/>
           </div>
         );
         i = dateFns.addDays(i, 1);

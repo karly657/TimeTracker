@@ -1,15 +1,3 @@
-.red-bg {
-  background-color: #f3afaf;
-  height: inherit;
-  padding: 5px;
-}
-
-.green-bg {
-  background-color: #a7f3b6;
-  padding: 5px;
-  height: inherit;
-}
-
 .cell {
   background-color: lightgray;
   border: solid 1px rgb(255, 255, 255);

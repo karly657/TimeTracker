@@ -1,6 +1,6 @@
 import * as constants from '../constants/actions'
 
-const initState = {
+export const initState = {
   authError: null
 }
 

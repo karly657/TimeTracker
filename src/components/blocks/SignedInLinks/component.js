@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { signOut } from '../../actions/authActions'
+import { signOut } from '../../../actions/authActions'
+import PropTypes from 'prop-types';
 
 const SignedInLinks = (props) => {
   return (
@@ -15,6 +16,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     signOut: () => dispatch(signOut())
   }
+}
+
+SignedInLinks.propTypes = {
+  email: PropTypes.string.isRequired,
 }
 
 export default connect(null, mapDispatchToProps)(SignedInLinks);

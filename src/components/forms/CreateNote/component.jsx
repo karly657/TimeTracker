@@ -1,19 +1,9 @@
 import React from 'react'
-import { createNote } from '../../actions/noteActions'
+import { createNote } from '../../../actions/noteActions'
 import { connect } from 'react-redux'
 import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
-
-const CreateNoteSchema = Yup.object().shape({
-  date: Yup.string()
-    .matches(/^\d{2}.\d{2}.\d{4}$/, 'Invalid date')
-    .required('Required'),
-  hours: Yup.number()
-    .moreThan(0)
-    .lessThan(24)
-    .required('Required')
-});
-
+import { createNoteSchema } from '../../schemas'
+import { CALENDAR_PAGE } from '../../../constants'
 
 const CreateNoteForm = (props) => {
   return (
@@ -23,10 +13,10 @@ const CreateNoteForm = (props) => {
           email: '',
           password: '',
         }}
-        validationSchema={CreateNoteSchema}
+        validationSchema={createNoteSchema}
         onSubmit={values => {
-          props.createNote(values);
-          props.history.push('/');
+          props.createNote(values)
+            .then(props.history.push(CALENDAR_PAGE));
         }}
       >
         {({ errors, touched }) => (
