@@ -1,30 +1,39 @@
 import React from 'react'
 import dateFns from 'date-fns'
-import { Note } from '../Note'
-import { FULL_DATE_FORMAT, DAY_FORMAT, DAY_OF_WEEK_FORMAT } from '../../../constants'
+import { Note } from '@/components/blocks/Note'
+import { FULL_DATE_FORMAT, DAY_FORMAT, DAY_OF_WEEK_FORMAT } from '@/constants'
 import './styles.css'
 
+/**
+ * Calendar component.
+ */
 class Calendar extends React.Component {
-  state = {
+    state = {
     currentDate: new Date()
   };
 
+  /**
+   * Render method for calendar header.
+   */
   renderHeader() {
     return (
-      <div className="header row flex-middle">
-        <div className="col col-start">
-          <div className="icon" onClick={this.prevMonth}>prev_month</div>
+      <div className="header row text-center mb-4">
+        <div className="col">
+          <div className="icon" onClick={this.prevMonth}>prev month</div>
         </div>
-        <div className="col col-center">
+        <div className="col">
           <span>{dateFns.format(this.state.currentDate, FULL_DATE_FORMAT)}</span>
         </div>
-        <div className="col col-end" onClick={this.nextMonth}>
-          <div className="icon">next_month</div>
+        <div className="col" onClick={this.nextMonth}>
+          <div className="icon">next month</div>
         </div>
       </div>
     );
   }
 
+  /**
+   * Render method for week days.
+   */
   renderDays() {
     const days = [];
 
@@ -32,16 +41,20 @@ class Calendar extends React.Component {
 
     for (let i = 0; i < 7; i++) {
       days.push(
-        <div className="col col-center" key={i}>
+        <div className="col-1 week-day mx-auto text-center" key={i}>
           {dateFns.format(dateFns.addDays(startDate, i), DAY_OF_WEEK_FORMAT)}
         </div>
       );
     }
 
-    return <div className="days row">{days}</div>;
+    return <div className="days row justify-content-center">{days}</div>;
   }
 
+  /**
+   * Render method for calendar cells.
+   */
   renderCells() {
+    const { notes } = this.props;
     const { currentDate, selectedDate } = this.state;
     const monthStart = dateFns.startOfMonth(currentDate);
     const monthEnd = dateFns.endOfMonth(monthStart);
@@ -59,7 +72,7 @@ class Calendar extends React.Component {
         formattedDate = dateFns.format(i, DAY_FORMAT);
         days.push(
           <div
-            className={`col cell ${
+            className={`col cell mx-auto ${
               !dateFns.isSameMonth(i, monthStart)
                 ? "disabled"
                 : dateFns.isSameDay(i, selectedDate) ? "selected" : ""
@@ -67,13 +80,13 @@ class Calendar extends React.Component {
             key={i}
           >
             <span className="number">{formattedDate}</span>
-            <Note day={i} notes={this.props.notes}/>
+            <Note day={i} notes={notes}/>
           </div>
         );
         i = dateFns.addDays(i, 1);
       }
       rows.push(
-        <div className="row" key={i}>
+        <div className="row " key={i}>
           {days}
         </div>
       );
@@ -83,18 +96,27 @@ class Calendar extends React.Component {
     return <div className="body">{rows}</div>;
   }
 
+  /**
+   * Runs when user clicks next month.
+   */
   nextMonth = () => {
     this.setState((prevState) => ({
       currentDate: dateFns.addMonths(prevState.currentDate, 1)
     }))
   };
 
+  /**
+   * Runs when user clicks prev month.
+   */
   prevMonth = () => {
     this.setState((prevState) => ({
       currentDate: dateFns.subMonths(prevState.currentDate, 1)
     }))
   };
 
+  /**
+   * Component main render method.
+   */
   render() {
     return (
       <div className="calendar">

@@ -1,1 +1,3 @@
-export { default as SignedInLinks } from './component'
+import SignedInLinks from './container'
+
+export default SignedInLinks

@@ -1,16 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { SIGN_IN_PAGE, CALENDAR_PAGE } from '../../../constants'
+import { SIGN_IN_PAGE, CALENDAR_PAGE } from '@/constants'
 
-const NotFoundPage = (props) => {
-  const { pathname, uid } = props.location.pathname;
+/**
+ * NotFoundPage component.
+ * @param {object} obj 
+ * @param {string} pathname Path
+ * @param {string} uid User ID
+ */
+const NotFoundPage = ({location: {pathname}, uid}) => {
   const message = `No match for ${pathname}`;
-  
+
   return (
-    <div>
+    <>
       <h3>{message}</h3>
       {uid ? <Link to={CALENDAR_PAGE}>Go to calendar</Link> : <Link to={SIGN_IN_PAGE}>Sign In</Link>}
-    </div>
+    </>
   );
 }
 

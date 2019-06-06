@@ -17,7 +17,6 @@
     "react-redux-firebase": "^2.2.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
-    "recompose": "^0.30.0",
     "redux": "^4.0.1",
     "redux-firestore": "^0.7.4",
     "redux-logger": "^3.0.6",
@@ -25,12 +24,9 @@
     "yup": "^0.27.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch",
-    "test:update": "react-scripts test --updateSnapshot",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -51,6 +47,7 @@
   "devDependencies": {
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.13.2",
+    "react-app-rewired": "^2.1.3",
     "react-test-renderer": "^16.8.6",
     "redux-mock-store": "^1.5.3"
   }

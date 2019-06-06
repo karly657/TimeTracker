@@ -1,22 +1,20 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { SignedInLinks } from '../SignedInLinks'
-import logo from '../../../assets/logo_timetracker.png'
+import SignedInLinks from '@/components/blocks/SignedInLinks'
+import logo from '@/assets/logo_timetracker.png'
 import './styles.css'
 
-const Header = (props) => {
+/**
+ * Header component.
+ * @param {string} props.uid User ID.
+ * @param {string} props.email User email.
+ */
+const Header = ({uid, email}) => {
   return (
     <nav className="navbar navbar-light bg-dark">
       <img alt="logo" className="nav-item logo" src={logo} />
-      {props.auth.uid && <SignedInLinks email={props.auth.email}/>}
+      {uid && <SignedInLinks email={email}/>}
     </nav>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.firebase.auth
-  }
-}
-
-export default connect(mapStateToProps)(Header);
+export default Header;

@@ -1,3 +1,3 @@
-import CreateNoteForm from './component'
+import CreateNoteForm from './container'
 
 export default CreateNoteForm;

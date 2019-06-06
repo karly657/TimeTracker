@@ -1,11 +1,10 @@
 import React from 'react'
-import { createNote } from '../../../actions/noteActions'
-import { connect } from 'react-redux'
-import { Formik, Form, Field } from 'formik';
-import { createNoteSchema } from '../../schemas'
-import { CALENDAR_PAGE } from '../../../constants'
+import { Formik, Form } from 'formik';
+import { createNoteSchema } from '@/schemas'
+import { CALENDAR_PAGE } from '@/constants'
+import Fieldset from '@/components/shared/Fieldset'
 
-const CreateNoteForm = (props) => {
+const CreateNoteForm = ({createNote, history, authError}) => {
   return (
     <div className="row justify-content-center">
       <Formik
@@ -15,28 +14,28 @@ const CreateNoteForm = (props) => {
         }}
         validationSchema={createNoteSchema}
         onSubmit={values => {
-          props.createNote(values)
-            .then(props.history.push(CALENDAR_PAGE));
+          createNote(values);
+          history.push(CALENDAR_PAGE);
         }}
       >
-        {({ errors, touched }) => (
+        {() => (
           <Form className="col-md-8">
             <h3 className="mb-4">Create note</h3>
 
-            <div className="form-group">
-              <label htmlFor="Date">Date</label>
-              <Field name="date" className="form-control" placeholder="MM.DD.YYYY"/>
-              {errors.date && touched.date && <div>{errors.date}</div>}
-            </div>
+            <Fieldset
+              name="date"
+              label="Date"
+              placeholder="MM.DD.YYYY"
+            />
 
-            <div className="form-group">
-              <label htmlFor="hours">Hours</label>
-              <Field name="hours" className="form-control" type="hours" placeholder="number"/>
-              {errors.hours && touched.hours && <div>{errors.hours}</div>}
-            </div>
+            <Fieldset
+              name="hours"
+              label="Hours"
+              placeholder="Number"
+            />
 
             <button type="submit" className="btn btn-primary">Create</button>
-            <div>{props.authError || null}</div>
+            <div>{authError || null}</div>
           </Form>
         )}
       </Formik>
@@ -44,12 +43,4 @@ const CreateNoteForm = (props) => {
   )
 }
 
-const mapStateToProps = undefined;
-
-const mapDispatchToProps = dispatch => {
-  return {
-    createNote: (note) => dispatch(createNote(note))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateNoteForm)
+export default CreateNoteForm;

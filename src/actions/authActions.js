@@ -1,4 +1,10 @@
-import { LOGIN_SUCCESS, LOGIN_ERROR, SIGNOUT_SUCCESS, SIGNUP_SUCCESS, SIGNUP_ERROR } from '../constants'
+import { 
+  LOGIN_SUCCESS, 
+  LOGIN_ERROR, 
+  SIGNOUT_SUCCESS, 
+  SIGNUP_SUCCESS, 
+  SIGNUP_ERROR 
+} from '@/constants'
 
 export const signIn = (user) => {
   return (dispatch, getState, {getFirebase}) => {

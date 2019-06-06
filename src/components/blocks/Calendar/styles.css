@@ -1,8 +1,21 @@
 .cell {
   background-color: lightgray;
   border: solid 1px rgb(255, 255, 255);
-  height: 60px;
   padding: 0px;
+}
+
+@media (max-width: 576px) {
+  .week-day {
+    transform: rotate(-90deg);
+    height: 25px;
+    overflow-wrap: auto;
+  }
+  .note {
+    font-size: 70%;
+  }
+  .container .btn {
+    width: inherit;
+  }
 }
 
 .row {
@@ -19,8 +32,6 @@
 }
 
 .col {
-  flex-grow: 1;
-  flex-basis: 0;
   max-width: 100%;
 }
 
@@ -52,7 +63,7 @@
   padding: 1.5em 0;
 }
 
-.calendar .header .icon:hover {
+.header .icon:hover {
   transform: scale(1.25);
   transition: 0.25s ease-out;
 }

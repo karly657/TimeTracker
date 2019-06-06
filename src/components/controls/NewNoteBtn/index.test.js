@@ -7,9 +7,4 @@ describe('New note button', () => {
     const wrapper = shallow(<NewNoteBtn />);
     expect(wrapper.last().text()).toEqual('<Link />')
   })
-
-  it('renders text', () => {
-    const wrapper = shallow(<NewNoteBtn />);
-    expect(wrapper.find('button').text()).toEqual('Create note')
-  });
 });

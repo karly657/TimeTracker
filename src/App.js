@@ -1,32 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-import Header from './components/blocks/Header'
-import SignInForm from './components/forms/SignIn'
-import SignUpForm from './components/forms/SignUp'
-import CalendarPage from './components/pages/CalendarPage'
-import NotFoundPage from './components/pages/NotFoundPage'
-import CreateNoteForm from './components/forms/CreateNote'
-import { CALENDAR_PAGE, SIGN_IN_PAGE, SIGN_UP_PAGE, CREATE_NOTE_PAGE } from './constants'
+import Header from '@/components/blocks/Header'
+import SignInForm from '@/components/forms/SignIn'
+import SignUpForm from '@/components/forms/SignUp'
+import CalendarPage from '@/components/pages/CalendarPage'
+import NotFoundPage from '@/components/pages/NotFoundPage'
+import CreateNoteForm from '@/components/forms/CreateNote'
+import { PrivateRoute } from '@/components/routes/PrivateRoute'
 
+import { CALENDAR_PAGE, SIGN_IN_PAGE, SIGN_UP_PAGE, CREATE_NOTE_PAGE } from '@/constants'
 import './App.css'
-
-const PrivateRoute = ({ component: Component, auth, ...rest }) => {
-  return (
-    <Route {...rest} render={(props) => (
-      Boolean(auth)
-        ? <Component {...props} />
-        : <Redirect to={SIGN_IN_PAGE} />
-    )} />
-  )
-}
 
 class App extends Component {
   render() {
+    const {uid, email} = this.props;
     return (
       <BrowserRouter>
-        <Header />
+        <Header uid={uid} email={email} />
         <div className="container h-100 content">
           <Switch>
             <PrivateRoute exact path={CALENDAR_PAGE} component={CalendarPage} auth={this.props.uid}/>
@@ -43,7 +35,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    uid: state.firebase.auth.uid
+    uid: state.firebase.auth.uid,
+    email: state.firebase.auth.email
   }
 }
 

@@ -1,4 +1,9 @@
-import { CREATE_NOTE_SUCCESS, CREATE_NOTE_ERROR, GET_NOTE_SUCCESS, GET_NOTE_ERROR } from '../constants'
+import { 
+  CREATE_NOTE_SUCCESS, 
+  CREATE_NOTE_ERROR, 
+  GET_NOTE_SUCCESS, 
+  GET_NOTE_ERROR 
+} from '@/constants'
 
 export const createNote = (note) => {
   return (dispatch, getState, { getFirestore }) => {

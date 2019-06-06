@@ -1,3 +1,3 @@
-import SignUpForm from './component'
+import SignUpForm from './container'
 
 export default SignUpForm;
